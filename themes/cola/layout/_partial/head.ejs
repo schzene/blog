@@ -1,0 +1,58 @@
+<head>
+  <meta charset="utf-8">
+  <%
+    const baseTitle = config.title
+    const pageTitle = page.title || '首页'
+    const title = '小栈 ' + pageTitle
+  %>
+  <title><% if (title){ %><%= title %> | <% } %><%= config.title %></title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="shortcut icon" href="<%- url_for('imgs/shortcut-icon.ico') %>" type="image/x-icon">
+  <link rel="stylesheet" href="<%- url_for('css/public.css') %>" />
+  <link rel="stylesheet" href="<%- url_for('css/layout.css') %>" />
+  <link rel="stylesheet" href="<%- url_for('css/iconfont.css') %>" />
+  <link rel="stylesheet" href="<%- url_for('css/APlayer.min.css') %>" />
+  <script src="<%- url_for('js/APlayer.min.js') %>"></script>
+  <script src="<%- url_for('js/jquery.min.js') %>"></script>
+  <script src="<%- url_for('js/jquery.pjax.min.js') %>"></script>
+
+  <!-- KaTeX for formula rendering
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"></script>
+  <script>
+    // renderKatex 会在 DOMContentLoaded 与 pjax 完成时调用，安全地渲染行内 $...$ 与 $$...$$
+    function renderKatex() {
+      if (window.renderMathInElement) {
+        try {
+          renderMathInElement(document.body, {
+            // 支持行内与行间两种定界符
+            delimiters: [
+              {left: '\\begin', right: '\\end', display: true},
+              {left: '$$', right: '$$', display: true},
+              {left: '$', right: '$', display: false},
+              {left: '\\(', right: '\\)', display: false},
+              {left: '\\[', right: '\\]', display: true}
+            ],
+            // 避免渲染代码块、脚本、样式等
+            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
+            throwOnError: false
+          });
+        } catch (e) {
+          // 防止因单篇文章的公式错误导致整个页面报错
+          console.warn('KaTeX render error:', e);
+        }
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', renderKatex);
+    // pjax 完成后（主题使用 pjax），需要重新渲染动态加载的页面内容
+    document.addEventListener('pjax:complete', renderKatex);
+  </script> -->
+  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+
+  <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
+  <script>
+    document.title = `<%- title %>`
+  </script>
+</head>
