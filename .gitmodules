@@ -1,0 +1,3 @@
+[submodule "themes/cola"]
+	path = themes/cola
+	url = https://github.com/Aizener/hexo-theme-cola
