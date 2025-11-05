@@ -4,6 +4,7 @@ date: 2025-10-31 22:07:47
 categories: 密码学
 tags: paillier
 cover: /imgs/default-cover.jpeg
+mathjax: true 
 ---
 
 Paillier 算法是一种经典的半同态加密算法，其密文具有加法同态性。本文介绍Paillier算法的密钥生成、加解密、同态加、同态乘以及算法的优化加速。
@@ -12,7 +13,7 @@ Paillier 算法是一种经典的半同态加密算法，其密文具有加法�
 
 ## 密钥生成
 
-1. 随机选取两个大素数\\\(p\\\)和\\\(q\\\)，取\\\( n=pq \\\)，\\\(\Phi(n)=(p-1)(q-1)\\\)，满足\\\(\left|p\right|=\left|q\right|=k\\\)（\\\(p\\\)和\\\(q\\\)长度相等），且\\\(gcd(n,\Phi(n))=1\\\)（最大公约数为1）；
+1. 随机选取两个大素数\\( p \\)和\\( q \\)，取\\\( n=pq \\\)，\\( \Phi(n)=(p-1)(q-1) \\)，满足\\(\left|p\right|=\left|q\right|=k\\)（\\(p\\)和\\(q\\)长度相等），且\\(gcd(n,\Phi(n))=1\\)（最大公约数为1）；
 
 2. 计算\\(n=pq\\)以及\\(\lambda=lcm(p-1,q-1)\\)（最小公倍数）；
 
@@ -31,21 +32,21 @@ Paillier 算法是一种经典的半同态加密算法，其密文具有加法�
 
    若\\(g=n+1\\)，则\\(g^m\mod n^2=(mn+1)\mod n^2\\)。
 
-## 解密 \\(Decrypt(c)\\):
+## 解密 \\(Decrypt(c)\\)
 
 1. 输入密文c，满足\\(c\in\mathbb Z^*_{n^2}\\)；
 
 2. 计算明文\\(m=\frac{L(c^\lambda\mod n^2)}{L(g^\lambda\mod n^2)}\mod n=L(c^\lambda\mod n^2)\cdot\mu\mod n\\)。
 
-## 密文-密文同态加法:
+## 密文-密文同态加法
 
 返回 \\(c=c_1\cdot c_2\mod n^2\\)。
 
-## 密文-明文同态乘法:
+## 密文-明文同态乘法
 
 返回 \\(c=c_1^{m_2} \mod n^2\\)。
 
-## 加解密正确性：
+## 加解密正确性
 
 \begin{align}
 &\lambda=l_1(p-1)=l_2(q-1)\\\\
@@ -60,7 +61,7 @@ Decrypt(Encrypt(m))&=Decrypt(g^mr^n\mod n^2)\\\\
 &=\frac{lm\cdot n}{l\cdot n}=m
 \end{align}
 
-## 密文-密文同态加正确性：
+## 密文-密文同态加正确性
 
 \begin{align}
 Decrypt((c_1\cdot c_2)\mod n^2)&=Decrypt(g^{m_1}r_1^ng^{m^2}r_2^n\mod n^2)\\\\
@@ -68,7 +69,7 @@ Decrypt((c_1\cdot c_2)\mod n^2)&=Decrypt(g^{m_1}r_1^ng^{m^2}r_2^n\mod n^2)\\\\
 &=m_1+m_2
 \end{align}
 
-## 密文-明文同态乘正确性：
+## 密文-明文同态乘正确性
 
 \begin{align}
 Decrypt((c_1^{m_2})\mod n^2)&=Decrypt((g^{m_1}r^n)^{m^2}\mod n^2)\\\\
@@ -76,7 +77,7 @@ Decrypt((c_1^{m_2})\mod n^2)&=Decrypt((g^{m_1}r^n)^{m^2}\mod n^2)\\\\
 &=m_1m_2
 \end{align}
 
-## 安全性：
+## 安全性
 
 方案安全性可以归约到判定性合数剩余假设（Decisional Composite Residuosity Assumption, DCRA），即给定一个合数\\(n\\)和整数\\(z\\)，很难判定\\(z\\) 在模\\(n^2\\)下是否是\\(n\\)次剩余（目前为止还没有多项式时间的算法可以攻破），即是否存在\\(y\\)满足\\(z\equiv y^n(\mod n^2)\\)。
 
