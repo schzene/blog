@@ -50,7 +50,7 @@ tools:
   - ['https://coke-cola.gitee.io/resume-page/assets/dark-f439b888.jpeg', '在线简历生成器', '一个免费的在线简历生成工具', 'https://coke-cola.gitee.io/resume-page/#/']
 
 # 右侧栏网站信息
-copyright: 123445
+siteicp: ''
 
 
 # 是否开启文章评论 Valine:https://valine.js.org/configuration.htm

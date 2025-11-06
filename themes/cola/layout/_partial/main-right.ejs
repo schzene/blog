@@ -29,8 +29,23 @@
       <p>Power By <a href="https://hexo.io/zh-cn/docs/">Hexo</a>.</p>
       <p>Theme：<a href="https://github.com/Aizener/hexo-theme-cola">Cola.</a></p>
     </div>
-    <p class="main-right--refer"><a href="https://beian.miit.gov.cn/#/Integrated/index"><%- theme.copyright %></a> </p>
-  </div>
+    <p class="main-right--refer">
+        Copyright © <span id="site-year"><%= new Date().getFullYear() %></span> 
+        <a href="https://beian.miit.gov.cn"><%- theme.siteicp %></a> 
+    </p>
+    </div>
+  <script>
+    // 客户端覆盖年份（保留服务端回退以兼容无 JS 场景）
+    (function () {
+      try {
+        var y = new Date().getFullYear()
+        var el = document.getElementById('site-year')
+        if (el) el.textContent = y
+      } catch (e) {
+        console && console.error && console.error('set site year error:', e)
+      }
+    })()
+  </script>
 </div>
 <%
   const musics = theme.musics.map(item => ({

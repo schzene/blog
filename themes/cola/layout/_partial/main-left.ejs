@@ -111,7 +111,8 @@
       </p>
       <p class="main-left--subtitle">
         <span>上线时间：</span>
-        <span><%- runningDate %>天</span>
+        <!-- server-rendered fallback; JS will update this value on the client using data-public-date -->
+        <span id="site-running-days" data-public-date="<%- theme.public_date %>"><%- runningDate %>天</span>
       </p>
       <p class="main-left--subtitle">
         <span>当前版本：</span>
@@ -120,3 +121,28 @@
     </div>
   </div>
 </div>
+
+<script>
+  // 客户端动态计算上线天数（保留服务端渲染值作为回退）
+  (function () {
+    try {
+      var el = document.getElementById('site-running-days')
+      if (!el) return
+      var pd = el.getAttribute('data-public-date')
+      if (!pd) return
+      var publicTs = new Date(pd).getTime()
+      if (isNaN(publicTs)) return
+      function updateDays () {
+        var now = Date.now()
+        var days = Math.ceil((now - publicTs) / (1000 * 60 * 60 * 24))
+        el.textContent = days + '天'
+      }
+      // 初次更新
+      updateDays()
+      // 可选：在页面打开期间按日更新一次（在午夜刷新会更精确）。这里设置为每小时检查以保证在长时间打开页面时也能更新。
+      setInterval(updateDays, 1000 * 60 * 60)
+    } catch (e) {
+      console && console.error && console.error('site running days update error:', e)
+    }
+  })()
+</script>
