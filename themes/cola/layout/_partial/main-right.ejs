@@ -48,12 +48,13 @@
   </script>
 </div>
 <%
-  const musics = theme.musics.map(item => ({
+  // Guard against missing `theme.musics` to avoid runtime errors during EJS rendering.
+  const musics = (theme && theme.musics && Array.isArray(theme.musics)) ? theme.musics.map(item => ({
     name: item[0],
     artist: item[1],
     url: item[2],
     cover: url_for(item[3]),
-  }))
+  })) : []
 %>
 <script>
   function setOperateItem () {
@@ -79,11 +80,11 @@
   }
 
   setOperateItem()
-  const musics = JSON.parse(`<%- JSON.stringify(musics) %>`)
-  const ap = new APlayer({
-    container: document.querySelector('#aplayer'),
-    audio: musics,
-  })
+  // const musics = JSON.parse(`<%- JSON.stringify(musics) %>`)
+  // const ap = new APlayer({
+  //   container: document.querySelector('#aplayer'),
+  //   audio: musics,
+  // })
 
   $(document).on('pjax:complete', function() {
     setOperateItem()

@@ -16,40 +16,85 @@
   <script src="<%- url_for('js/jquery.min.js') %>"></script>
   <script src="<%- url_for('js/jquery.pjax.min.js') %>"></script>
 
-  <!-- KaTeX for formula rendering
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.css">
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/katex.min.js"></script>
-  <script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.4/dist/contrib/auto-render.min.js"></script>
+  <!-- MathJax: load only when page contains LaTeX markers -->
   <script>
-    // renderKatex 会在 DOMContentLoaded 与 pjax 完成时调用，安全地渲染行内 $...$ 与 $$...$$
-    function renderKatex() {
-      if (window.renderMathInElement) {
-        try {
-          renderMathInElement(document.body, {
-            // 支持行内与行间两种定界符
-            delimiters: [
-              {left: '\\begin', right: '\\end', display: true},
-              {left: '$$', right: '$$', display: true},
-              {left: '$', right: '$', display: false},
-              {left: '\\(', right: '\\)', display: false},
-              {left: '\\[', right: '\\]', display: true}
-            ],
-            // 避免渲染代码块、脚本、样式等
-            ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code'],
-            throwOnError: false
+    (function() {
+      const MATHJAX_ID = 'mathjax-script';
+      const MATHJAX_CDN = 'https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js';
+
+      function hasLatexContent() {
+        // Look inside article content first for performance
+        const article = document.querySelector('.article-content');
+        const hay = (article && article.textContent) ? article.textContent : document.body.textContent || '';
+        if (!hay) return false;
+        // Common TeX delimiters and environment starts
+        const re = /\\\(|\\\]|\\\[|\\begin\{|\$\$|\$(?!\s)|\\\)/;
+        return re.test(hay);
+      }
+
+      function loadMathJaxOnce(callback) {
+        if (window.MathJax) { return callback && callback(); }
+        if (document.getElementById(MATHJAX_ID)) {
+          // already loading; wait for load
+          document.getElementById(MATHJAX_ID).addEventListener('load', function onload() {
+            this.removeEventListener('load', onload);
+            callback && callback();
           });
-        } catch (e) {
-          // 防止因单篇文章的公式错误导致整个页面报错
-          console.warn('KaTeX render error:', e);
+          return;
+        }
+        const s = document.createElement('script');
+        s.id = MATHJAX_ID;
+        s.src = MATHJAX_CDN;
+        s.async = true;
+        s.onload = function() {
+          try {
+            // configure minimal common input; keep auto startup off
+            if (window.MathJax && window.MathJax.startup && window.MathJax.startup.defaultOptions) {
+              // MathJax v3
+              window.MathJax = window.MathJax || {};
+            }
+          } catch (e) {
+            console.warn('MathJax init warning', e);
+          }
+          callback && callback();
+        };
+        s.onerror = function() { console.error('Failed to load MathJax'); };
+        document.head.appendChild(s);
+      }
+
+      function typesetArticle() {
+        const article = document.querySelector('.article-content');
+        if (!article) return;
+        // For MathJax v3
+        if (window.MathJax && typeof window.MathJax.typesetPromise === 'function') {
+          try { window.MathJax.typesetPromise([article]); } catch (e) { console.warn('MathJax typeset error', e); }
+        } else if (window.MathJax && window.MathJax.Hub && typeof window.MathJax.Hub.Queue === 'function') {
+          // fallback for v2
+          try { window.MathJax.Hub.Queue(['Typeset', window.MathJax.Hub, article]); } catch (e) { console.warn('MathJax v2 typeset error', e); }
         }
       }
-    }
 
-    document.addEventListener('DOMContentLoaded', renderKatex);
-    // pjax 完成后（主题使用 pjax），需要重新渲染动态加载的页面内容
-    document.addEventListener('pjax:complete', renderKatex);
-  </script> -->
-  <script type="text/javascript" src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML"></script>
+      function maybeLoadAndTypeset() {
+        if (!hasLatexContent()) return;
+        loadMathJaxOnce(function() {
+          // Wait a tick so MathJax registers
+          requestAnimationFrame(typesetArticle);
+        });
+      }
+
+      // Run on initial load and on pjax complete
+      if (document.readyState === 'complete' || document.readyState === 'interactive') {
+        maybeLoadAndTypeset();
+      } else {
+        document.addEventListener('DOMContentLoaded', maybeLoadAndTypeset);
+      }
+      if (window.jQuery) {
+        $(document).on('pjax:complete', maybeLoadAndTypeset);
+      } else {
+        document.addEventListener('pjax:complete', maybeLoadAndTypeset);
+      }
+    })();
+  </script>
 
   <script src='//unpkg.com/valine/dist/Valine.min.js'></script>
   <script>
