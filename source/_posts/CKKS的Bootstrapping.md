@@ -45,16 +45,7 @@ d\_0 + d\_1 \cdot s + d\_2 \cdot s^2 &= c\_0^1 \cdot c\_0^2 + (c\_0^1 \cdot c\_1
 
 # CKKS Regular Bootstrapping
 
-<div align="center">
-
-```mermaid
-graph LR
-  A["p + e (mod q)"] -->|ModRaise| B["(Q/q)(p + e) = p + qI (mod Q)"]
-  B["(Q/q)(p + e) = p + qI (mod Q)"] -->|CoeffToSlot| C["Encode(p + qI)"]
-  C["Encode(p + qI)"] -->|EvalMod| D["Encode(p)"]
-  D["Encode(p)"] -->|SlotToCoeff| E["p(X) mod Q'"]
-```
-</div>
+![process](/images/CKKS的Bootstrapping/process.png)
 
 ---
 
