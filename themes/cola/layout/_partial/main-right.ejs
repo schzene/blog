@@ -31,9 +31,11 @@
     </div>
     <p class="main-right--refer">
         Copyright © <span id="site-year"><%= new Date().getFullYear() %></span> 
-        <a href="https://beian.miit.gov.cn"><%- theme.siteicp %></a> 
     </p>
-    </div>
+    <p class="main-right--icp">
+        <a href="https://beian.miit.gov.cn/" target="_blank" rel="noopener noreferrer"><%= theme.siteicp %></a>
+    </p>
+  </div>
   <script>
     // 客户端覆盖年份（保留服务端回退以兼容无 JS 场景）
     (function () {

@@ -12,6 +12,8 @@
     "version": "8.1.1"
   },
   "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^5.2.1",
     "hexo": "^8.0.0",
     "hexo-filter-mathjax": "^0.9.1",
     "hexo-generator-archive": "^2.0.0",
@@ -22,6 +24,20 @@
     "hexo-renderer-kramed": "^0.1.4",
     "hexo-renderer-stylus": "^3.0.1",
     "hexo-server": "^3.0.0",
-    "hexo-theme-landscape": "^1.0.0"
-  }
+    "hexo-theme-landscape": "^1.0.0",
+    "http-proxy-middleware": "^3.0.5"
+  },
+  "description": "基于Hexo引擎的博客，使用[hexo-theme-cola主题](https://github.com/Aizener/hexo-theme-cola)",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/schzene/blog.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/schzene/blog/issues"
+  },
+  "homepage": "https://github.com/schzene/blog#readme"
 }

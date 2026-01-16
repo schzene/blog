@@ -77,16 +77,21 @@
 <script>
   // var定义，避免pjax重新进来造成的重复声明错误
   var config = JSON.parse('<%- JSON.stringify(theme.comments) %>')
-  new Valine({
+  // new Valine({
+  //   el: '#vcomments',
+  //   appId: config.appId,
+  //   appKey: config.appKey,
+  //   placeholder: config.placeholder,
+  //   meta: config.meta,
+  //   recordIP: config.recordIP,
+  //   visitor: config.visitor,
+  //   enableQQ: config.enableQQ,
+  //   path: '<%- post.path %>'
+  // })
+  // import { init } from 'https://unpkg.com/@waline/client@v3/dist/waline.js';
+  Waline.init({
     el: '#vcomments',
-    appId: config.appId,
-    appKey: config.appKey,
-    placeholder: config.placeholder,
-    meta: config.meta,
-    recordIP: config.recordIP,
-    visitor: config.visitor,
-    enableQQ: config.enableQQ,
-    path: '<%- post.path %>'
+    serverURL: config.serverURL,
   })
 </script>
 <% } %>
