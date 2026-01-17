@@ -48,7 +48,8 @@ siteicp: '赣ICP备2026000951号-1'
 # 是否开启文章评论
 comments:
   enable: true
-  serverURL: "https://starlit-cannoli-f0de92.netlify.app/.netlify/functions/comment"
+  serverURL: "https://comment.0xc0de.top"
+  #serverURL: "https://starlit-cannoli-f0de92.netlify.app/.netlify/functions/comment"
   # appId: 'UYwmowxyE3QOTsLR56RLlT80-gzGzoHsz'
   # appKey: '2YkYBMBWYPBRiyyJZb77tsRr'
   # placeholder: '请留下你宝贵的意见吧~'
