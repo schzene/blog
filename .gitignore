@@ -6,3 +6,5 @@ node_modules/
 blog_public/
 .deploy*/
 _multiconfig.yml
+
+images

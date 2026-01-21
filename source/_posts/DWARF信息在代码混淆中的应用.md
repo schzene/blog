@@ -3,7 +3,7 @@ title: DWARF信息在代码混淆中的应用
 date: 2025-11-14 09:55:36
 tags: 代码混淆
 comments: true
-cover: /imgs/cloud-moon.webp
+cover: https://image.0xc0de.top/file/1768984549782_cover.webp
 ---
 
 ## DWARF是什么？

@@ -3,13 +3,13 @@ title: CKKS学习心得
 date: 2025-12-15 21:42:00
 categories: 密码学
 tags: CKKS
-cover: /images/CKKS学习心得/ckks-process.svg
+cover: https://image.0xc0de.top/file/1768983451999_ckks-process.svg
 mathjax: true 
 ---
 
 # CKKS全过程
 
-<img src="/images/CKKS学习心得/ckks-process.svg" style="zoom:90%;" />
+<img src="https://image.0xc0de.top/file/1768983451999_ckks-process.svg" style="zoom:90%;" />
 
 ## 一些背景知识
 
@@ -17,7 +17,7 @@ mathjax: true
 
 在复数集内有\\(n\\)个单位根，分别是\\(\omega^k\_n=\cos{\frac{2k\pi}{n} }+j\sin{\frac{2k\pi}{n} }=e^{\frac{2k\pi}{n}j}\\)，其中\\(k=0,1,\dots,n-1\\)\\((\omega^0\_n=\omega^n\_n=1)\\)，如果\\(k\\)与\\(n\\)互质，那么称\\(\omega^k\_n\\)为本原单位根。如下图的\\(\omega^k\_1\\)，\\(\omega^k\_3\\)，\\(\omega^k\_5\\)，\\(\omega^k\_7\\)。
 
-<img src="/images/CKKS学习心得/cyclotomic_polynomial.png" style="zoom:50%;" />
+<img src="https://image.0xc0de.top/file/1768983451581_cyclotomic_polynomial.png" style="zoom:50%;" />
 
 若一个整系数多项式的根都是n次本原单位根，这个多项式就是分圆多项式。它是一个不可约多项式，即：
 

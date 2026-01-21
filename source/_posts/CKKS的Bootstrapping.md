@@ -3,7 +3,7 @@ title: CKKS的Bootstrapping
 date: 2025-12-15 22:29:12
 categories: 密码学
 tags: CKKS
-cover: /images/CKKS的Bootstrapping/sinx.png
+cover: https://image.0xc0de.top/file/1768983377942_sinx.png
 mathjax: true 
 ---
 
@@ -45,7 +45,7 @@ d\_0 + d\_1 \cdot s + d\_2 \cdot s^2 &= c\_0^1 \cdot c\_0^2 + (c\_0^1 \cdot c\_1
 
 # CKKS Regular Bootstrapping
 
-![process](/images/CKKS的Bootstrapping/process.png)
+![process](https://image.0xc0de.top/file/1768983377598_process.png)
 
 ---
 
