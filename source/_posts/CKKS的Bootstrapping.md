@@ -119,7 +119,7 @@ s\_j' \approx s\_j \mod{q\_0} = m\_j + e\_j' (\mod{q\_0})
 
 可以直接用$\sin(x)$拟合$f(x)$，之后泰勒展开$\sin(x)$：
 
-![sinx](/images/CKKS的Bootstrapping/sinx.png)
+![sinx](https://image.0xc0de.top/file/1768983377942_sinx.png)
 
 ---
 

@@ -93,6 +93,12 @@ Decrypt((c_1^{m_2})\mod n^2)&=Decrypt((g^{m_1}r^n)^{m^2}\mod n^2)\\\\
 
 若\\(g = n + 1\\)，则
 
+\begin{align}
+g^m \mod n^2 &= (n + 1)^m \mod n^2\\\\
+&=(n^m + mn^{m-1} + \cdots + mn + 1) \mod n^2\\\\
+&=(mn + 1) \mod n^2
+\end{align}
+
 ## 解密优化
 
 若有素数\\(p\\)和\\(q\\)，\\(n=pq\\)，计算模指数\\(a^b\mod n\\)时，可采用中国剩余定理（Chinese remainder theorem， CRT）优化，即先把\\(a^b\\)映射到\\(\mathbb Z_p\\)、\\(\mathbb Z_q\\)上计算，再将结果聚合到\\(\mathbb Z_n\\)，可得最终结果。
